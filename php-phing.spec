@@ -1,4 +1,5 @@
 Summary:	PHP project build system based on Apache Ant
+Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		phing
 Version:	2.2.0
 Release:	0.2
@@ -7,7 +8,6 @@ Group:		Development/Languages/PHP
 Source0:	http://phing.tigris.org/files/documents/995/33811/%{name}-%{version}.tar.gz
 # Source0-md5:	db69fb31b4224501f3508fd6d8c45b10
 URL:		http://phing.info/
-Requires:	/usr/bin/phing
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -23,6 +23,18 @@ token replacement, XSLT transformation, Smarty template
 transformations), file system operations, interactive build support,
 SQL execution, CVS operations, tools for creating PEAR packages, and
 much more.
+
+%description -l pl.UTF-8
+PHing Is Not GNU make (phing to nie GNU make) to system budowania
+projektów oparty na narzędziu Apache Ant. Pozwala robić wszystko to,
+co da się zrobić przy użyciu tradycyjnego systemu budowania takiego
+jak GNU make i wykorzystuje proste pliki reguł XML oraz rozszerzalne
+klasy PHP "zadań", co czyni z niego łatwe w użyciu i elastyczne
+środowisko. Możliwości obejmują przekształcenia (np. podstawienia
+tokenów, przekształcenia XSLT, przekształcenia szablonów Smarty),
+operacje na systemie plików, obsługę interaktywnego budowania,
+wywoływanie SQL-a, operacje na CVS-ie, narzędzia do tworzenia
+pakietów PEAR i wiele więcej.
 
 %prep
 %setup -q
