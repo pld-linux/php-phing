@@ -1,12 +1,13 @@
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		phing
-Version:	2.2.0
-Release:	0.2
+Version:	2.3.0
+%define		_rc	RC1
+Release:	0.%{_rc}.0.1
 License:	LGPL
 Group:		Development/Languages/PHP
-Source0:	http://phing.tigris.org/files/documents/995/33811/%{name}-%{version}.tar.gz
-# Source0-md5:	db69fb31b4224501f3508fd6d8c45b10
+Source0:	http://phing.tigris.org/files/documents/995/39590/%{name}-%{version}%{_rc}.tar.gz
+# Source0-md5:	ebaa39cbe4eef64948db1e180f5e893e
 URL:		http://phing.info/
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -37,7 +38,7 @@ wywoływanie SQL-a, operacje na CVS-ie, narzędzia do tworzenia
 pakietów PEAR i wiele więcej.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}%{_rc}
 
 %install
 rm -rf $RPM_BUILD_ROOT
