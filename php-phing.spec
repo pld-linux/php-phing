@@ -2,13 +2,12 @@ Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		phing
 Version:	2.3.0
-%define		_rc	RC1
-Release:	0.%{_rc}.0.1
+Release:	1
 License:	LGPL
 Group:		Development/Languages/PHP
-Source0:	http://phing.tigris.org/files/documents/995/39590/%{name}-%{version}%{_rc}.tar.gz
-# Source0-md5:	ebaa39cbe4eef64948db1e180f5e893e
-URL:		http://phing.info/
+Source0:	http://phing.tigris.org/files/documents/995/40189/%{name}-%{version}.zip
+# Source0-md5:	7a986d9f24a2b8d6c4574d66545ce174
+URL:		http://www.phing.info/
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -34,11 +33,11 @@ klasy PHP "zadań", co czyni z niego łatwe w użyciu i elastyczne
 środowisko. Możliwości obejmują przekształcenia (np. podstawienia
 tokenów, przekształcenia XSLT, przekształcenia szablonów Smarty),
 operacje na systemie plików, obsługę interaktywnego budowania,
-wywoływanie SQL-a, operacje na CVS-ie, narzędzia do tworzenia
-pakietów PEAR i wiele więcej.
+wywoływanie SQL-a, operacje na CVS-ie, narzędzia do tworzenia pakietów
+PEAR i wiele więcej.
 
 %prep
-%setup -q -n %{name}-%{version}%{_rc}
+%setup -q
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -53,7 +52,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGELOG CREDITS README TODO
+%doc CREDITS
 %attr(755,root,root) %{_bindir}/phing
 %dir %{_appdir}
 %dir %{_appdir}/bin
