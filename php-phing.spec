@@ -2,7 +2,7 @@ Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		phing
 Version:	2.3.0
-Release:	0.5
+Release:	0.7
 License:	LGPL
 Group:		Development/Languages/PHP
 Source0:	http://phing.tigris.org/files/documents/995/40189/%{name}-%{version}.zip
@@ -57,6 +57,9 @@ mv $RPM_BUILD_ROOT{%{_appdir},%{_appdir}/data/phing}/listener/defaults.propertie
 mv $RPM_BUILD_ROOT{%{_appdir},%{_appdir}/data/phing}/tasks/defaults.properties
 mv $RPM_BUILD_ROOT{%{_appdir},%{_appdir}/data/phing}/types/defaults.properties
 
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -a docs/example/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -66,3 +69,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/phing
 %{php_data_dir}/phing.php
 %{_appdir}
+%{_examplesdir}/%{name}-%{version}
