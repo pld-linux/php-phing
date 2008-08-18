@@ -2,18 +2,21 @@ Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		phing
 Version:	2.3.0
-Release:	0.2
+Release:	0.5
 License:	LGPL
 Group:		Development/Languages/PHP
 Source0:	http://phing.tigris.org/files/documents/995/40189/%{name}-%{version}.zip
 # Source0-md5:	7a986d9f24a2b8d6c4574d66545ce174
 Source1:	%{name}.sh
 URL:		http://www.phing.info/
+BuildRequires:	sed >= 4.0
 Requires:	/usr/bin/php
+Requires:	php-common >= 4:5.0.2
+Requires:	php-dom
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_appdir	%{_datadir}/%{name}
+%define		_appdir	%{php_data_dir}/%{name}
 
 %description
 PHing Is Not GNU make; it's a project build system based on Apache
@@ -40,13 +43,19 @@ PEAR i wiele więcej.
 
 %prep
 %setup -q
+%{__sed} -i -e 's,@DATA-DIR@,%{_appdir}/data,g' classes/phing/Phing.php
+find -name '*.php' -print0 | xargs -0 %{__sed} -i -e 's,\r$,,'
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{php_data_dir}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_appdir}/data/phing/{listener,tasks,types}}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/phing
-cp -a classes/* $RPM_BUILD_ROOT%{php_data_dir}/phing
 cp -a bin/phing.php $RPM_BUILD_ROOT%{php_data_dir}
+cp -a classes/phing/* $RPM_BUILD_ROOT%{_appdir}
+cp -a etc $RPM_BUILD_ROOT%{_appdir}/data/phing
+mv $RPM_BUILD_ROOT{%{_appdir},%{_appdir}/data/phing}/listener/defaults.properties
+mv $RPM_BUILD_ROOT{%{_appdir},%{_appdir}/data/phing}/tasks/defaults.properties
+mv $RPM_BUILD_ROOT{%{_appdir},%{_appdir}/data/phing}/types/defaults.properties
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -56,4 +65,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc CREDITS
 %attr(755,root,root) %{_bindir}/phing
 %{php_data_dir}/phing.php
-%{php_data_dir}/phing
+%{_appdir}
