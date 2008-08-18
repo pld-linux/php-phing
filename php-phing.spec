@@ -2,12 +2,14 @@ Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		phing
 Version:	2.3.0
-Release:	1
+Release:	0.2
 License:	LGPL
 Group:		Development/Languages/PHP
 Source0:	http://phing.tigris.org/files/documents/995/40189/%{name}-%{version}.zip
 # Source0-md5:	7a986d9f24a2b8d6c4574d66545ce174
+Source1:	%{name}.sh
 URL:		http://www.phing.info/
+Requires:	/usr/bin/php
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -41,11 +43,10 @@ PEAR i wiele więcej.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_appdir}/bin,%{_bindir}}
-cp -a classes $RPM_BUILD_ROOT%{_appdir}
-install bin/phing $RPM_BUILD_ROOT%{_appdir}/bin
-cp -a bin/phing.php $RPM_BUILD_ROOT%{_appdir}/bin
-ln -s %{_appdir}/bin/phing $RPM_BUILD_ROOT%{_bindir}/phing
+install -d $RPM_BUILD_ROOT{%{_bindir},%{php_data_dir}}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/phing
+cp -a classes/* $RPM_BUILD_ROOT%{php_data_dir}/phing
+cp -a bin/phing.php $RPM_BUILD_ROOT%{php_data_dir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -54,8 +55,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CREDITS
 %attr(755,root,root) %{_bindir}/phing
-%dir %{_appdir}
-%dir %{_appdir}/bin
-%attr(755,root,root) %{_appdir}/bin/phing
-%{_appdir}/bin/phing.php
-%{_appdir}/classes
+%{php_data_dir}/phing.php
+%{php_data_dir}/phing
