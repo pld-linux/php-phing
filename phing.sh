@@ -10,4 +10,4 @@ if [ -z "$PHP_CLASSPATH" ]; then
 	export PHP_CLASSPATH=/usr/share/php
 fi
 
-exec /usr/bin/php /usr/share/php/phing.php -logger phing.listener.AnsiColorLogger $@
+exec /usr/bin/php /usr/share/php/phing.php -logger phing.listener.DefaultLogger ${1:+"$@"}
