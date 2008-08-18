@@ -13,6 +13,7 @@ BuildRequires:	sed >= 4.0
 Requires:	/usr/bin/php
 Requires:	php-common >= 4:5.0.2
 Requires:	php-dom
+Requires:	php-xml
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
