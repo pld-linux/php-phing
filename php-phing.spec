@@ -1,3 +1,5 @@
+# TODO
+# - package pear .registry
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		phing
@@ -46,6 +48,11 @@ PEAR i wiele więcej.
 %setup -q
 %{__sed} -i -e 's,@DATA-DIR@,%{_appdir}/data,g' classes/phing/Phing.php
 find -name '*.php' -print0 | xargs -0 %{__sed} -i -e 's,\r$,,'
+cat > optional-packages.txt <<EOF
+phing/phing can optionally use package "pear/VersionControl_SVN" (version >= 0.3.0alpha1)
+phing/phing can optionally use package "pear/Xdebug" (version >= 2.0.0beta2)
+phing/phing can optionally use package "pear/PEAR_PackageFileManager" (version >= 1.5.2)
+EOF
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -66,7 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CREDITS
+%doc CREDITS optional-packages.txt
 %attr(755,root,root) %{_bindir}/phing
 %{php_data_dir}/phing.php
 %{_appdir}
