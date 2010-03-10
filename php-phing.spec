@@ -1,25 +1,34 @@
 # TODO
 # - package pear .registry
+# - subpackages for tasks with external dependencies
+%include	/usr/lib/rpm/macros.php
+%define		pkgname	phing
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
-Name:		phing
+Name:		php-%{pkgname}
 Version:	2.3.0
 Release:	3
 License:	LGPL
 Group:		Development/Languages/PHP
-Source0:	http://phing.tigris.org/files/documents/995/40189/%{name}-%{version}.zip
+Source0:	http://phing.tigris.org/files/documents/995/40189/%{pkgname}-%{version}.zip
 # Source0-md5:	7a986d9f24a2b8d6c4574d66545ce174
-Source1:	%{name}.sh
+Source1:	%{pkgname}.sh
 URL:		http://www.phing.info/
 BuildRequires:	sed >= 4.0
 Requires:	/usr/bin/php
 Requires:	php-common >= 4:5.0.2
 Requires:	php-dom
 Requires:	php-xml
+Obsoletes:	phing
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_appdir	%{php_data_dir}/%{name}
+%define		_appdir	%{php_data_dir}/%{pkgname}
+
+%define		_noautopear	pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php)
+
+# put it together for rpmbuild
+%define		_noautoreq	%{?_noautophp} %{?_noautopear}
 
 %description
 PHing Is Not GNU make; it's a project build system based on Apache
@@ -45,7 +54,7 @@ wywoływanie SQL-a, operacje na CVS-ie, narzędzia do tworzenia pakietów
 PEAR i wiele więcej.
 
 %prep
-%setup -q
+%setup -q -n %{pkgname}-%{version}
 %{__sed} -i -e 's,@DATA-DIR@,%{_appdir}/data,g' classes/phing/Phing.php
 find -name '*.php' -print0 | xargs -0 %{__sed} -i -e 's,\r$,,'
 cat > optional-packages.txt <<EOF
