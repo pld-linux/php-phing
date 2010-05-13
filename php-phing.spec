@@ -14,7 +14,9 @@ Source0:	http://phing.tigris.org/files/documents/995/40189/%{pkgname}-%{version}
 # Source0-md5:	7a986d9f24a2b8d6c4574d66545ce174
 Source1:	%{pkgname}.sh
 URL:		http://www.phing.info/
+BuildRequires:	rpm-php-pearprov
 BuildRequires:	sed >= 4.0
+BuildRequires:	unzip
 Requires:	/usr/bin/php
 Requires:	php-common >= 4:5.0.2
 Requires:	php-dom
