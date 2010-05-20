@@ -1,20 +1,23 @@
 # TODO
-# - package pear .registry
 # - subpackages for tasks with external dependencies
-%include	/usr/lib/rpm/macros.php
+#%%include	/usr/lib/rpm/macros.php
 %define		pkgname	phing
+%define		_pearname	%{pkgname}
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
 Version:	2.3.0
-Release:	3
+Release:	3.3
 License:	LGPL
 Group:		Development/Languages/PHP
-Source0:	http://phing.tigris.org/files/documents/995/40189/%{pkgname}-%{version}.zip
-# Source0-md5:	7a986d9f24a2b8d6c4574d66545ce174
+Source0:	http://pear.phing.info/get/phing-%{version}.tgz
+# Source0-md5:	1b874d1185d7f71dbe9a263e3bf62be2
 Source1:	%{pkgname}.sh
 URL:		http://www.phing.info/
-BuildRequires:	rpm-php-pearprov
+BuildRequires:	php-channel(pear.phing.info)
+BuildRequires:	php-pear-PEAR
+BuildRequires:	rpm-php-pearprov >= 4.4.2-11
+BuildRequires:	rpmbuild(macros) >= 1.300
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 Requires:	/usr/bin/php
@@ -27,7 +30,23 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_appdir	%{php_data_dir}/%{pkgname}
 
-%define		_noautopear	pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php)
+%define		_noautopear pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php) pear(phpDocumentor/Setup.inc.php) pear(simpletest/.*)
+
+# these are all optional:
+#Wed Mar 10 15:52:25 2010 php-pear-Archive_Tar-1.3.2-1.noarch
+#Wed Mar 10 15:52:25 2010 php-pear-Console_Getopt-1.2.3-3.noarch
+#Wed Mar 10 15:52:26 2010 php-pear-Structures_Graph-1.0.2-1.noarch
+#Wed Mar 10 15:52:57 2010 php-pear-1.2-2.noarch
+#Wed Mar 10 15:52:57 2010 php-pear-PEAR-1.7.2-10.noarch
+#Wed Mar 10 15:52:57 2010 php-pear-PEAR-core-1.7.2-10.noarch
+#Wed Mar 10 22:07:22 2010 php-pear-VersionControl_SVN-0.3.1-3.noarch
+#Wed Mar 10 22:07:22 2010 php-pear-XML_Parser-1.3.2-1.noarch
+#Wed Mar 10 22:07:23 2010 php-pear-Mail-1.1.14-3.noarch
+#Wed Mar 10 22:07:23 2010 php-pear-PEAR_PackageFileManager-1.6.3-1.noarch
+#Wed Mar 10 22:07:24 2010 php-pear-Benchmark-1.2.7-1.noarch
+#Wed Mar 10 22:07:24 2010 php-pear-Log-1.11.3-1.noarch
+#Wed Mar 10 22:07:24 2010 php-pear-PHPUnit2-2.3.6-2.noarch
+#Wed Mar 10 22:07:25 2010 php-PHPUnit-3.3.14-2.noarch
 
 # put it together for rpmbuild
 %define		_noautoreq	%{?_noautophp} %{?_noautopear}
@@ -56,36 +75,31 @@ wywoływanie SQL-a, operacje na CVS-ie, narzędzia do tworzenia pakietów
 PEAR i wiele więcej.
 
 %prep
-%setup -q -n %{pkgname}-%{version}
-%{__sed} -i -e 's,@DATA-DIR@,%{_appdir}/data,g' classes/phing/Phing.php
-find -name '*.php' -print0 | xargs -0 %{__sed} -i -e 's,\r$,,'
-cat > optional-packages.txt <<EOF
-phing/phing can optionally use package "pear/VersionControl_SVN" (version >= 0.3.0alpha1)
-phing/phing can optionally use package "pear/Xdebug" (version >= 2.0.0beta2)
-phing/phing can optionally use package "pear/PEAR_PackageFileManager" (version >= 1.5.2)
-EOF
+%pear_package_setup
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_appdir}/data/phing/{listener,tasks,types}}
-install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/phing
-cp -a bin/phing.php $RPM_BUILD_ROOT%{php_data_dir}
-cp -a classes/phing/* $RPM_BUILD_ROOT%{_appdir}
-cp -a etc $RPM_BUILD_ROOT%{_appdir}/data/phing
-mv $RPM_BUILD_ROOT{%{_appdir},%{_appdir}/data/phing}/listener/defaults.properties
-mv $RPM_BUILD_ROOT{%{_appdir},%{_appdir}/data/phing}/tasks/defaults.properties
-mv $RPM_BUILD_ROOT{%{_appdir},%{_appdir}/data/phing}/types/defaults.properties
+install -d $RPM_BUILD_ROOT{%{_bindir},%{php_pear_dir},%{_appdir}/data/%{pkgname}}
+%pear_package_install
 
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
-cp -a docs/example/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+install -p %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/phing
+
+# cleanup the mess pear install made
+mv $RPM_BUILD_ROOT{%{php_pear_dir}/%{pkgname}/*,%{_appdir}}
+mv $RPM_BUILD_ROOT{%{php_pear_dir}/data/%{pkgname}/*,%{_appdir}/data/%{pkgname}}
+mv $RPM_BUILD_ROOT{%{php_pear_dir}/phing.php,%{php_data_dir}/phing.php}
+
+#install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+#cp -a docs/example/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CREDITS optional-packages.txt
+%doc optional-packages.txt
 %attr(755,root,root) %{_bindir}/phing
+%{php_pear_dir}/.registry/.channel.*/phing.reg
 %{php_data_dir}/phing.php
 %{_appdir}
-%{_examplesdir}/%{name}-%{version}
+#%{_examplesdir}/%{name}-%{version}
