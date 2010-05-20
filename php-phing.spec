@@ -8,7 +8,7 @@ Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache
 Name:		php-%{pkgname}
 Version:	2.4.1
 Release:	0.3
-License:	LGPL
+License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
 # Source0-md5:	3cb7be9bc033dfe713d4ae4c62235d60
