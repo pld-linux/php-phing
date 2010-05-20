@@ -6,24 +6,25 @@
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
-Version:	2.3.0
-Release:	3.3
+Version:	2.4.1
+Release:	0.3
 License:	LGPL
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
-# Source0-md5:	1b874d1185d7f71dbe9a263e3bf62be2
+# Source0-md5:	3cb7be9bc033dfe713d4ae4c62235d60
 Source1:	%{pkgname}.sh
 URL:		http://www.phing.info/
 BuildRequires:	php-channel(pear.phing.info)
-BuildRequires:	php-pear-PEAR
+BuildRequires:	php-pear-PEAR >= 1.8.0
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
-BuildRequires:	rpmbuild(macros) >= 1.300
+BuildRequires:	rpmbuild(macros) >= 1.564
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 Requires:	/usr/bin/php
 Requires:	php-common >= 4:5.0.2
 Requires:	php-dom
 Requires:	php-xml
+Provides:	phing = %{version}
 Obsoletes:	phing
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -45,7 +46,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 #Wed Mar 10 22:07:23 2010 php-pear-PEAR_PackageFileManager-1.6.3-1.noarch
 #Wed Mar 10 22:07:24 2010 php-pear-Benchmark-1.2.7-1.noarch
 #Wed Mar 10 22:07:24 2010 php-pear-Log-1.11.3-1.noarch
-#Wed Mar 10 22:07:24 2010 php-pear-PHPUnit2-2.3.6-2.noarch
 #Wed Mar 10 22:07:25 2010 php-PHPUnit-3.3.14-2.noarch
 
 # put it together for rpmbuild
@@ -75,7 +75,7 @@ wywoływanie SQL-a, operacje na CVS-ie, narzędzia do tworzenia pakietów
 PEAR i wiele więcej.
 
 %prep
-%pear_package_setup
+%pear_package_setup -d data_dir=%{_appdir}/data
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -86,7 +86,6 @@ install -p %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/phing
 
 # cleanup the mess pear install made
 mv $RPM_BUILD_ROOT{%{php_pear_dir}/%{pkgname}/*,%{_appdir}}
-mv $RPM_BUILD_ROOT{%{php_pear_dir}/data/%{pkgname}/*,%{_appdir}/data/%{pkgname}}
 mv $RPM_BUILD_ROOT{%{php_pear_dir}/phing.php,%{php_data_dir}/phing.php}
 
 #install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
