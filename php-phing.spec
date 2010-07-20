@@ -7,7 +7,7 @@ Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
 Version:	2.4.1
-Release:	0.3
+Release:	0.4
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
@@ -21,6 +21,7 @@ BuildRequires:	rpmbuild(macros) >= 1.564
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 Requires:	/usr/bin/php
+Requires:	php-PHPUnit >= 3.4
 Requires:	php-common >= 4:5.0.2
 Requires:	php-dom
 Requires:	php-xml
@@ -79,7 +80,7 @@ PEAR i wiele więcej.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{php_pear_dir},%{_appdir}/data/%{pkgname}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{php_pear_dir},%{_appdir}}
 %pear_package_install
 
 install -p %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/phing
@@ -87,6 +88,7 @@ install -p %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/phing
 # cleanup the mess pear install made
 mv $RPM_BUILD_ROOT{%{php_pear_dir}/%{pkgname}/*,%{_appdir}}
 mv $RPM_BUILD_ROOT{%{php_pear_dir}/phing.php,%{php_data_dir}/phing.php}
+cp -a ./%{php_data_dir}/* $RPM_BUILD_ROOT%{php_data_dir}
 
 #install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 #cp -a docs/example/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -100,5 +102,21 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/phing
 %{php_pear_dir}/.registry/.channel.*/phing.reg
 %{php_data_dir}/phing.php
-%{_appdir}
+%dir %{_appdir}
+%{_appdir}/*.php
+%{_appdir}/filters
+%{_appdir}/input
+%{_appdir}/listener
+%{_appdir}/mappers
+%{_appdir}/parser
+%{_appdir}/system
+%{_appdir}/tasks
+%{_appdir}/types
+%{_appdir}/util
+
+%dir %{_appdir}/lib
+%{_appdir}/lib/Capsule.php
+
+%{_appdir}/data
+
 #%{_examplesdir}/%{name}-%{version}
