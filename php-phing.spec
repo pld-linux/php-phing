@@ -32,7 +32,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_appdir	%{php_data_dir}/%{pkgname}
 
-%define		_noautopear pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php) pear(phpDocumentor/Setup.inc.php) pear(simpletest/.*) pear(SymfonyComponents/.*) pear(XML/RPC2/Client.php)
+%define		_noautopear pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php) pear(phpDocumentor/Setup.inc.php) pear(simpletest/.*)
 
 # these are all optional:
 #Wed Mar 10 15:52:25 2010 php-pear-Archive_Tar-1.3.2-1.noarch
