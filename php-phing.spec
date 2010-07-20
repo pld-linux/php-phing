@@ -15,7 +15,7 @@ Source0:	http://pear.phing.info/get/phing-%{version}.tgz
 Source1:	%{pkgname}.sh
 URL:		http://www.phing.info/
 BuildRequires:	php-channel(pear.phing.info)
-BuildRequires:	php-pear-PEAR >= 1.8.0
+BuildRequires:	php-pear-PEAR >= 1:1.8.0
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.564
 BuildRequires:	sed >= 4.0
@@ -32,7 +32,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_appdir	%{php_data_dir}/%{pkgname}
 
-%define		_noautopear pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php) pear(phpDocumentor/Setup.inc.php) pear(simpletest/.*)
+%define		_noautopear pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php) pear(phpDocumentor/Setup.inc.php) pear(simpletest/.*) pear(SymfonyComponents/.*) pear(XML/RPC2/Client.php)
 
 # these are all optional:
 #Wed Mar 10 15:52:25 2010 php-pear-Archive_Tar-1.3.2-1.noarch
