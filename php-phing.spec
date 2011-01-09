@@ -7,7 +7,7 @@ Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
 Version:	2.4.4
-Release:	1
+Release:	2
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
@@ -26,7 +26,7 @@ Requires:	php-common >= 4:5.0.2
 Requires:	php-dom
 Requires:	php-xml
 Provides:	phing = %{version}
-Obsoletes:	phing
+Obsoletes:	phing < 2.4.1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -77,6 +77,9 @@ PEAR i wiele więcej.
 
 %prep
 %pear_package_setup -d data_dir=%{_appdir}/data
+
+# 2.4.4 release tarball contains .rej and .orig files junk
+find '(' -name '*~' -o -name '*.orig' -o -name '*.rej' ')' -print0 | xargs -0 -r -l512 rm -f
 
 %install
 rm -rf $RPM_BUILD_ROOT
