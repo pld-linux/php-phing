@@ -7,7 +7,7 @@ Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
 Version:	2.4.4
-Release:	3
+Release:	4
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
@@ -21,10 +21,10 @@ BuildRequires:	rpmbuild(macros) >= 1.564
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 Requires:	/usr/bin/php
-Requires:	php-PHPUnit >= 3.4
 Requires:	php-common >= 4:5.0.2
 Requires:	php-dom
 Requires:	php-xml
+Suggests:	php-phpunit-PHPUnit >= 3.4
 Provides:	phing = %{version}
 Obsoletes:	phing < 2.4.1
 BuildArch:	noarch
@@ -47,7 +47,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 #Wed Mar 10 22:07:23 2010 php-pear-PEAR_PackageFileManager-1.6.3-1.noarch
 #Wed Mar 10 22:07:24 2010 php-pear-Benchmark-1.2.7-1.noarch
 #Wed Mar 10 22:07:24 2010 php-pear-Log-1.11.3-1.noarch
-#Wed Mar 10 22:07:25 2010 php-PHPUnit-3.3.14-2.noarch
 
 # put it together for rpmbuild
 %define		_noautoreq	%{?_noautophp} %{?_noautopear}
