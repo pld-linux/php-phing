@@ -6,24 +6,32 @@
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
-Version:	2.4.4
-Release:	4
+Version:	2.4.5
+Release:	1
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
-# Source0-md5:	9ebad864b4f67334666a90aae9470614
+# Source0-md5:	5db821e00b59bee94a4bc97d45910681
 Source1:	%{pkgname}.sh
 URL:		http://www.phing.info/
 BuildRequires:	php-channel(pear.phing.info)
 BuildRequires:	php-pear-PEAR >= 1:1.8.0
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
-BuildRequires:	rpmbuild(macros) >= 1.564
+BuildRequires:	rpmbuild(macros) >= 1.593
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 Requires:	/usr/bin/php
 Requires:	php-common >= 4:5.0.2
 Requires:	php-dom
 Requires:	php-xml
+Suggests:	php-pear-Archive_Tar
+Suggests:	php-pear-HTTP_Request2
+Suggests:	php-pear-PEAR_PackageFileManager
+Suggests:	php-pear-PhpDocumentor
+Suggests:	php-pear-Services_Amazon_S3
+Suggests:	php-pear-VersionControl_Git
+Suggests:	php-pear-VersionControl_SVN
+Suggests:	php-pecl-xdebug
 Suggests:	php-phpunit-PHPUnit >= 3.4
 Provides:	phing = %{version}
 Obsoletes:	phing < 2.4.1
@@ -32,24 +40,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_appdir	%{php_data_dir}/%{pkgname}
 
-%define		_noautopear pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php) pear(phpDocumentor/Setup.inc.php) pear(simpletest/.*)
-
-# these are all optional:
-#Wed Mar 10 15:52:25 2010 php-pear-Archive_Tar-1.3.2-1.noarch
-#Wed Mar 10 15:52:25 2010 php-pear-Console_Getopt-1.2.3-3.noarch
-#Wed Mar 10 15:52:26 2010 php-pear-Structures_Graph-1.0.2-1.noarch
-#Wed Mar 10 15:52:57 2010 php-pear-1.2-2.noarch
-#Wed Mar 10 15:52:57 2010 php-pear-PEAR-1.7.2-10.noarch
-#Wed Mar 10 15:52:57 2010 php-pear-PEAR-core-1.7.2-10.noarch
-#Wed Mar 10 22:07:22 2010 php-pear-VersionControl_SVN-0.3.1-3.noarch
-#Wed Mar 10 22:07:22 2010 php-pear-XML_Parser-1.3.2-1.noarch
-#Wed Mar 10 22:07:23 2010 php-pear-Mail-1.1.14-3.noarch
-#Wed Mar 10 22:07:23 2010 php-pear-PEAR_PackageFileManager-1.6.3-1.noarch
-#Wed Mar 10 22:07:24 2010 php-pear-Benchmark-1.2.7-1.noarch
-#Wed Mar 10 22:07:24 2010 php-pear-Log-1.11.3-1.noarch
-
-# put it together for rpmbuild
-%define		_noautoreq	%{?_noautophp} %{?_noautopear}
+# exclude optional dependencies
+%define		_noautoreq	pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php) pear(phpDocumentor/Setup.inc.php) pear(simpletest/.*) pear(Archive/Tar.*) pear(HTTP/Request2.*) pear(PEAR/PackageFileManager.*) pear(PhpDocumentor.*) pear(Services/Amazon/S3.*) pear(VersionControl/Git.*) pear(VersionControl/SVN.*)
 
 %description
 PHing Is Not GNU make; it's a project build system based on Apache
@@ -97,6 +89,9 @@ cp -a ./%{php_data_dir}/* $RPM_BUILD_ROOT%{php_data_dir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post -p <lua>
+%pear_package_print_optionalpackages
 
 %files
 %defattr(644,root,root,755)
