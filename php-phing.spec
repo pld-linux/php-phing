@@ -1,17 +1,17 @@
 # TODO
 # - subpackages for tasks with external dependencies
+%define		pkgname		phing
+%define		pearname	%{pkgname}
 #%%include	/usr/lib/rpm/macros.php
-%define		pkgname	phing
-%define		_pearname	%{pkgname}
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
-Version:	2.4.5
+Version:	2.4.6
 Release:	1
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
-# Source0-md5:	5db821e00b59bee94a4bc97d45910681
+# Source0-md5:	679fd186479b1cdafcbd1eaf9f543707
 Source1:	%{pkgname}.sh
 URL:		http://www.phing.info/
 BuildRequires:	php-channel(pear.phing.info)
@@ -21,18 +21,25 @@ BuildRequires:	rpmbuild(macros) >= 1.593
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 Requires:	/usr/bin/php
+Requires:	php-channel(pear.phing.info)
 Requires:	php-common >= 4:5.0.2
 Requires:	php-dom
 Requires:	php-xml
 Suggests:	php-pear-Archive_Tar
 Suggests:	php-pear-HTTP_Request2
 Suggests:	php-pear-PEAR_PackageFileManager
+Suggests:	php-pear-PHP_CodeSniffer
 Suggests:	php-pear-PhpDocumentor
 Suggests:	php-pear-Services_Amazon_S3
 Suggests:	php-pear-VersionControl_Git
 Suggests:	php-pear-VersionControl_SVN
+Suggests:	php-pear.docblox-project.org-DocBlox
+Suggests:	php-pear.pdepend.org-PHP_Depend
+Suggests:	php-pear.phpmd.org-PHP_PMD
 Suggests:	php-pecl-xdebug
+Suggests:	php-phing-phingdocs
 Suggests:	php-phpunit-PHPUnit >= 3.4
+Suggests:	php-phpunit-phpcpd
 Provides:	phing = %{version}
 Obsoletes:	phing < 2.4.1
 BuildArch:	noarch
@@ -41,7 +48,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_appdir	%{php_data_dir}/%{pkgname}
 
 # exclude optional dependencies
-%define		_noautoreq	pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php) pear(phpDocumentor/Setup.inc.php) pear(simpletest/.*) pear(Archive/Tar.*) pear(HTTP/Request2.*) pear(PEAR/PackageFileManager.*) pear(PhpDocumentor.*) pear(Services/Amazon/S3.*) pear(VersionControl/Git.*) pear(VersionControl/SVN.*)
+%define		_noautoreq	pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php) pear(phpDocumentor/Setup.inc.php) pear(simpletest/.*) pear(Archive/Tar.*) pear(HTTP/Request2.*) pear(PEAR/PackageFileManager.*) pear(PhpDocumentor.*) pear(Services/Amazon/S3.*) pear(VersionControl/Git.*) pear(VersionControl/SVN.*) pear(PHP/CodeSniffer.*)
 
 %description
 PHing Is Not GNU make; it's a project build system based on Apache
