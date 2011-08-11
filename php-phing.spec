@@ -15,6 +15,7 @@ Source0:	http://pear.phing.info/get/phing-%{version}.tgz
 Source1:	%{pkgname}.sh
 URL:		http://www.phing.info/
 BuildRequires:	php-channel(pear.phing.info)
+BuildRequires:	php-pear >= 4:1.3.8
 BuildRequires:	php-pear-PEAR >= 1:1.8.0
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.593
@@ -25,6 +26,8 @@ Requires:	php-channel(pear.phing.info)
 Requires:	php-common >= 4:5.0.2
 Requires:	php-dom
 Requires:	php-xml
+Suggests:	php-docblox-DocBlox
+Suggests:	php-pdepend-PHP_Depend
 Suggests:	php-pear-Archive_Tar
 Suggests:	php-pear-HTTP_Request2
 Suggests:	php-pear-PEAR_PackageFileManager
@@ -33,11 +36,9 @@ Suggests:	php-pear-PhpDocumentor
 Suggests:	php-pear-Services_Amazon_S3
 Suggests:	php-pear-VersionControl_Git
 Suggests:	php-pear-VersionControl_SVN
-Suggests:	php-pear.docblox-project.org-DocBlox
-Suggests:	php-pear.pdepend.org-PHP_Depend
-Suggests:	php-pear.phpmd.org-PHP_PMD
 Suggests:	php-pecl-xdebug
 Suggests:	php-phing-phingdocs
+Suggests:	php-phpmd-PHP_PMD
 Suggests:	php-phpunit-PHPUnit >= 3.4
 Suggests:	php-phpunit-phpcpd
 Provides:	phing = %{version}
