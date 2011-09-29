@@ -1,17 +1,17 @@
 # TODO
-# - subpackages for tasks with external dependencies
+# - subpackages for tasks with external dependencies, or rather suggests?
 %define		pkgname		phing
 %define		pearname	%{pkgname}
 #%%include	/usr/lib/rpm/macros.php
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
-Version:	2.4.6
+Version:	2.4.7.1
 Release:	1
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
-# Source0-md5:	679fd186479b1cdafcbd1eaf9f543707
+# Source0-md5:	6c8bf6eef21195b123015ea1ad9e2d3d
 Source1:	%{pkgname}.sh
 URL:		http://www.phing.info/
 BuildRequires:	php-channel(pear.phing.info)
@@ -26,6 +26,7 @@ Requires:	php-channel(pear.phing.info)
 Requires:	php-common >= 4:5.0.2
 Requires:	php-dom
 Requires:	php-xml
+Suggests:	jsl
 Suggests:	php-docblox-DocBlox
 Suggests:	php-pdepend-PHP_Depend
 Suggests:	php-pear-Archive_Tar
