@@ -2,18 +2,18 @@
 # - subpackages for tasks with external dependencies, or rather suggests?
 %define		pkgname		phing
 %define		pearname	%{pkgname}
+%define		php_min_version 5.0.2
 #%%include	/usr/lib/rpm/macros.php
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
-Version:	2.4.7.1
+Version:	2.4.8
 Release:	1
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
-# Source0-md5:	6c8bf6eef21195b123015ea1ad9e2d3d
+# Source0-md5:	c97cbe1d3ff348b7403085fd7a743433
 Source1:	%{pkgname}.sh
-Patch0:		bug-797.patch
 URL:		http://www.phing.info/
 BuildRequires:	php-channel(pear.phing.info)
 BuildRequires:	php-pear >= 4:1.3.8
@@ -24,7 +24,7 @@ BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 Requires:	/usr/bin/php
 Requires:	php-channel(pear.phing.info)
-Requires:	php-common >= 4:5.0.2
+Requires:	php-common >= 4:%{php_min_version}
 Requires:	php-dom
 Requires:	php-xml
 Suggests:	jsl
@@ -42,6 +42,7 @@ Suggests:	php-pecl-xdebug
 Suggests:	php-phing-phingdocs
 Suggests:	php-phpmd-PHP_PMD
 Suggests:	php-phpunit-PHPUnit >= 3.4
+Suggests:	php-phpunit-PHP_CodeCoverage
 Suggests:	php-phpunit-phpcpd
 Provides:	phing = %{version}
 Obsoletes:	phing < 2.4.1
@@ -78,7 +79,6 @@ PEAR i wiele więcej.
 
 %prep
 %pear_package_setup -d data_dir=%{_appdir}/data
-%patch0 -p1
 
 # 2.4.4 release tarball contains .rej and .orig files junk
 find '(' -name '*~' -o -name '*.orig' -o -name '*.rej' ')' -print0 | xargs -0 -r -l512 rm -f
