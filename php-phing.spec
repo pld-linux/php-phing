@@ -8,7 +8,7 @@ Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
 Version:	2.4.12
-Release:	1
+Release:	2
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
@@ -23,10 +23,10 @@ BuildRequires:	rpmbuild(macros) >= 1.593
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 Requires:	/usr/bin/php
+Requires:	php(dom)
+Requires:	php(xml)
 Requires:	php-channel(pear.phing.info)
 Requires:	php-common >= 4:%{php_min_version}
-Requires:	php-dom
-Requires:	php-xml
 Suggests:	jsl
 Suggests:	php-docblox-DocBlox
 Suggests:	php-pdepend-PHP_Depend
