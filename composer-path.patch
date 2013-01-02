@@ -1,0 +1,11 @@
+--- phing-2.4.14/usr/share/pear/phing/tasks/ext/ComposerTask.php~	2013-01-03 00:00:01.787983874 +0200
++++ phing-2.4.14/usr/share/pear/phing/tasks/ext/ComposerTask.php	2013-01-03 00:07:48.000000000 +0200
+@@ -58,7 +58,7 @@
+      *
+      * @var string path to Composer application
+      */
+-    private $composer = 'composer.phar';
++    private $composer = '/usr/bin/composer';
+ 
+     public function __construct()
+     {

@@ -14,6 +14,7 @@ Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
 # Source0-md5:	6ddc17bceb5d983f7cf677794a17b3b8
 Source1:	%{pkgname}.sh
+Patch0:		composer-path.patch
 URL:		http://www.phing.info/
 BuildRequires:	php-channel(pear.phing.info)
 BuildRequires:	php-pear >= 4:1.3.8
@@ -81,6 +82,7 @@ PEAR i wiele więcej.
 
 %prep
 %pear_package_setup -d data_dir=%{_appdir}/data
+%patch0 -p1
 
 # 2.4.4 release tarball contains .rej and .orig files junk
 find '(' -name '*~' -o -name '*.orig' -o -name '*.rej' ')' -print0 | xargs -0 -r -l512 rm -f
