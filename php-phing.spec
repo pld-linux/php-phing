@@ -20,7 +20,7 @@ BuildRequires:	php-channel(pear.phing.info)
 BuildRequires:	php-pear >= 4:1.3.8
 BuildRequires:	php-pear-PEAR >= 1:1.8.0
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
-BuildRequires:	rpmbuild(macros) >= 1.593
+BuildRequires:	rpmbuild(macros) >= 1.654
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 Requires:	/usr/bin/php
@@ -55,7 +55,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_appdir	%{php_data_dir}/%{pkgname}
 
 # exclude optional dependencies
-%define		_noautoreq	pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php) pear(phpDocumentor/Setup.inc.php) pear(simpletest/.*) pear(Archive/Tar.*) pear(HTTP/Request2.*) pear(PEAR/PackageFileManager.*) pear(PhpDocumentor.*) pear(Services/Amazon/S3.*) pear(VersionControl/Git.*) pear(VersionControl/SVN.*) pear(PHP/CodeSniffer.*) pear(Net/Growl.*)
+%define		_noautoreq_pear creole/Creole.php phing/.* Smarty.class.php phpDocumentor/Setup.inc.php simpletest/.* Archive/Tar.* HTTP/Request2.* PEAR/PackageFileManager.* PhpDocumentor.* Services/Amazon/S3.* VersionControl/Git.* VersionControl/SVN.* PHP/CodeSniffer.* Net/Growl.*
 
 %description
 PHing Is Not GNU make; it's a project build system based on Apache
