@@ -55,7 +55,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_appdir	%{php_data_dir}/%{pkgname}
 
 # exclude optional dependencies
-%define		_noautoreq_pear creole/Creole.php phing/.* Smarty.class.php phpDocumentor/Setup.inc.php simpletest/.* Archive/Tar.* HTTP/Request2.* PEAR/PackageFileManager.* PhpDocumentor.* Services/Amazon/S3.* VersionControl/Git.* VersionControl/SVN.* PHP/CodeSniffer.* Net/Growl.*
+%define		_noautoreq_pear phing/.* Archive/Tar.* HTTP/Request2.* Log.php Mail.php Mail/mime.php Net/FTP.php Net/Growl.* PEAR.php PEAR/.* PEAR/PackageFileManager.* PHP/CodeCoverage/.* PHP/CodeSniffer.* PHP/Depend/.* PHP/PMD.* PHPLOC/.* PHPUnit/.* Services/Amazon/S3.* Smarty.class.php System.php VersionControl/.* creole/Creole.php [Pp]hpDocumentor/.* simpletest/.* 
 
 %description
 PHing Is Not GNU make; it's a project build system based on Apache
