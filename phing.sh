@@ -1,6 +1,5 @@
 #!/bin/sh
 # Shell wrapper for Phing
-# $Id$
 #
 # This script will do the following:
 # - check for PHP_CLASSPATH, if found use it
