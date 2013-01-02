@@ -7,12 +7,12 @@
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
-Version:	2.4.12
-Release:	3
+Version:	2.4.13
+Release:	1
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
-# Source0-md5:	6ccb862bc8a97b2c505f64c83c7a1371
+# Source0-md5:	72c9543558f5699029da5f38d80c9855
 Source1:	%{pkgname}.sh
 URL:		http://www.phing.info/
 BuildRequires:	php-channel(pear.phing.info)
@@ -32,6 +32,7 @@ Suggests:	php-docblox-DocBlox
 Suggests:	php-pdepend-PHP_Depend
 Suggests:	php-pear-Archive_Tar
 Suggests:	php-pear-HTTP_Request2
+Suggests:	php-pear-Net_Growl
 Suggests:	php-pear-PEAR_PackageFileManager
 Suggests:	php-pear-PHP_CodeSniffer
 Suggests:	php-pear-PhpDocumentor
@@ -53,7 +54,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_appdir	%{php_data_dir}/%{pkgname}
 
 # exclude optional dependencies
-%define		_noautoreq	pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php) pear(phpDocumentor/Setup.inc.php) pear(simpletest/.*) pear(Archive/Tar.*) pear(HTTP/Request2.*) pear(PEAR/PackageFileManager.*) pear(PhpDocumentor.*) pear(Services/Amazon/S3.*) pear(VersionControl/Git.*) pear(VersionControl/SVN.*) pear(PHP/CodeSniffer.*)
+%define		_noautoreq	pear(creole/Creole.php) pear(phing/.*) pear(Smarty.class.php) pear(phpDocumentor/Setup.inc.php) pear(simpletest/.*) pear(Archive/Tar.*) pear(HTTP/Request2.*) pear(PEAR/PackageFileManager.*) pear(PhpDocumentor.*) pear(Services/Amazon/S3.*) pear(VersionControl/Git.*) pear(VersionControl/SVN.*) pear(PHP/CodeSniffer.*) pear(Net/Growl.*)
 
 %description
 PHing Is Not GNU make; it's a project build system based on Apache
