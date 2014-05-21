@@ -2,17 +2,17 @@
 # - subpackages for tasks with external dependencies, or rather suggests?
 %define		pkgname		phing
 %define		pearname	%{pkgname}
-%define		php_min_version 5.0.2
-#%%include	/usr/lib/rpm/macros.php
+%define		php_min_version 5.2.2
+%include	/usr/lib/rpm/macros.php
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
-Version:	2.4.14
+Version:	2.7.0
 Release:	1
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
-# Source0-md5:	6ddc17bceb5d983f7cf677794a17b3b8
+# Source0-md5:	043aea733869155383e47af46cb69424
 Source1:	%{pkgname}.sh
 Patch0:		composer-path.patch
 URL:		http://www.phing.info/
@@ -22,13 +22,23 @@ BuildRequires:	php-pear-PEAR >= 1:1.8.0
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.654
 BuildRequires:	sed >= 4.0
-BuildRequires:	unzip
 Requires:	/usr/bin/php
 Requires:	php(core) >= %{php_min_version}
+Requires:	php(date)
 Requires:	php(dom)
+Requires:	php(spl)
 Requires:	php(xml)
 Requires:	php-channel(pear.phing.info)
 Suggests:	jsl
+Suggests:	php(ctype)
+Suggests:	php(ftp)
+Suggests:	php(gettext)
+Suggests:	php(hash)
+Suggests:	php(mbstring)
+Suggests:	php(openssl)
+Suggests:	php(pcre)
+Suggests:	php(simplexml)
+Suggests:	php(xsl)
 Suggests:	php-docblox-DocBlox
 Suggests:	php-pdepend-PHP_Depend
 Suggests:	php-pear-Archive_Tar
@@ -46,6 +56,7 @@ Suggests:	php-phpmd-PHP_PMD
 Suggests:	php-phpunit-PHPUnit >= 3.6
 Suggests:	php-phpunit-PHP_CodeCoverage
 Suggests:	php-phpunit-phpcpd
+Suggests:	php-phpunit-phploc
 Provides:	phing = %{version}
 Obsoletes:	phing < 2.4.1
 Conflicts:	php-phpunit-PHPUnit < 3.6
@@ -55,7 +66,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_appdir	%{php_data_dir}/%{pkgname}
 
 # exclude optional dependencies
-%define		_noautoreq_pear phing/.* Archive/Tar.* HTTP/Request2.* Log.php Mail.php Mail/mime.php Net/FTP.php Net/Growl.* PEAR.php PEAR/.* PEAR/PackageFileManager.* PHP/CodeCoverage/.* PHP/CodeSniffer.* PHP/Depend/.* PHP/PMD.* PHPLOC/.* PHPUnit/.* Services/Amazon/S3.* Smarty.class.php System.php VersionControl/.* creole/Creole.php [Pp]hpDocumentor/.* simpletest/.* 
+%define		_noautoreq_pear phing/.* Archive/Tar.* HTTP/Request2.* Log.php Mail.php Mail/mime.php Net/FTP.php Net/Growl.* PEAR.php PEAR/.* PEAR/PackageFileManager.* PHP/CodeCoverage/.* PHP/CodeSniffer.* PHP/Depend/.* PHP/PMD.* PHPLOC/.* PHPUnit/.* Services/Amazon/S3.* Smarty.class.php System.php VersionControl/.* creole/Creole.php [Pp]hpDocumentor/.* simpletest/.*
+
+# exclude optional php dependencies
+%define		_noautophp	php-ctype php-ftp php-gettext php-hash php-mbstring php-openssl php-pcre php-simplexml php-xsl
+
+# put it together for rpmbuild
+%define		_noautoreq	%{?_noautophp}
 
 %description
 PHing Is Not GNU make; it's a project build system based on Apache
