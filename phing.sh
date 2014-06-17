@@ -9,6 +9,10 @@ if [ -z "$PHP_CLASSPATH" ]; then
 	export PHP_CLASSPATH=/usr/share/php
 fi
 
+if [ -z "$PHP_COMMAND" ]; then
+	export PHP_COMMAND=/usr/bin/php
+fi
+
 export PHING_HOME=/usr/share/php/phing
 
-exec /usr/bin/php /usr/share/php/phing.php -logger phing.listener.DefaultLogger ${1:+"$@"}
+exec $PHP_COMMAND /usr/share/php/phing.php -logger phing.listener.DefaultLogger ${1:+"$@"}
