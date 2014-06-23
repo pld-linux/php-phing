@@ -38,6 +38,7 @@ Suggests:	php(mbstring)
 Suggests:	php(openssl)
 Suggests:	php(pcre)
 Suggests:	php(simplexml)
+Suggests:	php(xdebug)
 Suggests:	php(xsl)
 Suggests:	php-docblox-DocBlox
 Suggests:	php-pdepend-PHP_Depend
@@ -50,7 +51,6 @@ Suggests:	php-pear-PhpDocumentor
 Suggests:	php-pear-Services_Amazon_S3
 Suggests:	php-pear-VersionControl_Git
 Suggests:	php-pear-VersionControl_SVN
-Suggests:	php-pecl-xdebug
 Suggests:	php-phing-phingdocs
 Suggests:	php-phpmd-PHP_PMD
 Suggests:	php-phpunit-PHPUnit >= 3.6
