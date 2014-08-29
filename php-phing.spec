@@ -8,7 +8,7 @@ Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
 Version:	2.8.2
-Release:	1
+Release:	2
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
@@ -66,7 +66,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_appdir	%{php_data_dir}/%{pkgname}
 
 # exclude optional dependencies
-%define		_noautoreq_pear phing/.* Archive/Tar.* HTTP/Request2.* Log.php Mail.php Mail/mime.php Net/FTP.php Net/Growl.* PEAR.php PEAR/.* PEAR/PackageFileManager.* PHP/CodeCoverage/.* PHP/CodeSniffer.* PHP/Depend/.* PHP/PMD.* PHPLOC/.* PHPUnit/.* Services/Amazon/S3.* Smarty.class.php SmartyBC.class.php System.php VersionControl/.* creole/Creole.php [Pp]hpDocumentor/.* simpletest/.* PHPCPD/Autoload.php SebastianBergmann/PHPCPD/autoload.php Ssh2MethodConnectionParam.php Ssh2MethodParam.php
+%define		_noautoreq_pear phing/.* Archive/Tar.* HTTP/Request2.* Log.php Mail.php Mail/mime.php Net/FTP.php Net/Growl.* PEAR.php PEAR/.* PEAR/PackageFileManager.* PHP/CodeCoverage/.* PHP/CodeSniffer.* PHP/Depend/.* PHP/PMD.* PHPMD/.* phpunit/.* vendor/.* PHPLOC/.* PHPUnit/.* Services/Amazon/S3.* Smarty.class.php SmartyBC.class.php System.php VersionControl/.* creole/Creole.php [Pp]hpDocumentor/.* simpletest/.* PHPCPD/Autoload.php SebastianBergmann/PHPCPD/autoload.php Ssh2MethodConnectionParam.php Ssh2MethodParam.php
 
 # exclude optional php dependencies
 %define		_noautophp	php-ctype php-ftp php-gettext php-hash php-mbstring php-openssl php-pcre php-simplexml php-xsl
