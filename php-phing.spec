@@ -7,12 +7,12 @@
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
-Version:	2.12.0
+Version:	2.13.0
 Release:	1
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
-# Source0-md5:	d01db5973314178e10899d90cc3d5d15
+# Source0-md5:	e190b2778b221263860b3ed7e9d8fa92
 Source1:	%{pkgname}.sh
 Patch0:		composer-path.patch
 URL:		http://www.phing.info/
