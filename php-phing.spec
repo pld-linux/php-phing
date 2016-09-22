@@ -7,12 +7,12 @@
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
-Version:	2.14.0
+Version:	2.15.0
 Release:	1
 License:	LGPL v3
 Group:		Development/Languages/PHP
 Source0:	http://pear.phing.info/get/phing-%{version}.tgz
-# Source0-md5:	6bdf34b2909bdfcabfce91efe78e0fce
+# Source0-md5:	a32976e9666887aea75945e31187e776
 Source1:	%{pkgname}.sh
 Patch0:		composer-path.patch
 URL:		http://www.phing.info/
@@ -66,7 +66,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_appdir	%{php_data_dir}/%{pkgname}
 
 # exclude optional dependencies
-%define		_noautoreq_pear phing/.* Archive/Tar.* HTTP/Request2.* Log.php Mail.php Mail/mime.php Net/FTP.php Net/Growl.* PEAR.php PEAR/.* PEAR/PackageFileManager.* PHP/CodeCoverage/.* PHP/CodeSniffer.* PHP/Depend/.* PHP/PMD.* PHPMD/.* phpunit/.* vendor/.* PHPLOC/.* PHPUnit/.* Services/Amazon/S3.* Smarty.class.php SmartyBC.class.php System.php VersionControl/.* creole/Creole.php [Pp]hpDocumentor/.* simpletest/.* PHPCPD/Autoload.php SebastianBergmann/PHPCPD/autoload.php Ssh2MethodConnectionParam.php Ssh2MethodParam.php IniFileConfig.php IniFileRemove.php IniFileSet.php Symfony/Component/Stopwatch/autoload.php
+%define		_noautoreq_pear phing/.* Archive/Tar.* HTTP/Request2.* Log.php Mail.php Mail/mime.php Net/FTP.php Net/Growl.* PEAR.php PEAR/.* PEAR/PackageFileManager.* PHP/CodeCoverage/.* PHP/CodeSniffer.* PHP/Depend/.* PHP/PMD.* PHPMD/.* phpunit/.* vendor/.* PHPLOC/.* PHPUnit/.* Services/Amazon/S3.* Smarty.class.php SmartyBC.class.php System.php VersionControl/.* creole/Creole.php [Pp]hpDocumentor/.* simpletest/.* PHPCPD/Autoload.php SebastianBergmann/PHPCPD/autoload.php Ssh2MethodConnectionParam.php Ssh2MethodParam.php IniFileConfig.php IniFileRemove.php IniFileSet.php Symfony/Component/Stopwatch/autoload.php scssphp/scss.inc.php
 
 # exclude optional php dependencies
 %define		_noautophp	php-ctype php-ftp php-gettext php-hash php-mbstring php-openssl php-pcre php-simplexml php-xsl
