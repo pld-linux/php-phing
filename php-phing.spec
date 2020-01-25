@@ -3,7 +3,6 @@
 %define		pkgname		phing
 %define		pearname	%{pkgname}
 %define		php_min_version 5.2.2
-%include	/usr/lib/rpm/macros.php
 Summary:	PHP project build system based on Apache Ant
 Summary(pl.UTF-8):	System budowania projektów w PHP oparty na narzędziu Apache Ant
 Name:		php-%{pkgname}
