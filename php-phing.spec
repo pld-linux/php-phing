@@ -98,7 +98,7 @@ PEAR i wiele więcej.
 
 %prep
 %pear_package_setup -d data_dir=%{_appdir}/data
-%patch0 -p1
+%patch -P0 -p1
 
 # 2.4.4 release tarball contains .rej and .orig files junk
 find '(' -name '*~' -o -name '*.orig' -o -name '*.rej' ')' -print0 | xargs -0 -r -l512 rm -f
